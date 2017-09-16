@@ -7,20 +7,25 @@
 
 int getNum()
 {
+
    static int i;
    printf( "Enter an integer: " );
    scanf( "%d", &i );
+
    return i;
 }
 
 int main(int argc, char *argv[])
 {
 
+   /* Some pre-processor code for very basic lint */
    #ifdef LINT
+
    static int i;
    printf( "argc: %d\n", argc );
    for( i=0; i<argc; i++ )
       printf( "argv[%d]: %s\n", i, argv[i] );
+
    #endif
 
    int age;
@@ -35,7 +40,6 @@ int main(int argc, char *argv[])
       else {
          printf( "%d is middle-aged\n", age );
       }
-
    } while( age != QUIT );
 
    return 0;
