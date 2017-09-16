@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
       printf( "argv[%d]: %s\n", i, argv[i] );
    #endif
 
-   static int age;
+   int age;
    do {
       age = getNum();
       if ( age < YOUNG ) {
