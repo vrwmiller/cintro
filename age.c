@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define LINT
+#undef LINT
 
 int getNum()
 {
@@ -12,6 +12,14 @@ int getNum()
 
 int main(int argc, char *argv[])
 {
+
+   #ifdef LINT
+   static int i;
+   printf("argc: %d\n", argc);
+   for(i=0; i<argc; i++)
+      printf("argv[%d]: %s\n", i, argv[i]);
+   #endif
+
    int age = getNum();
    printf("You entered %d\n", age);
 
