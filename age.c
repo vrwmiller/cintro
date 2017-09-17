@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+/*
+ * #define'ing DEBUG below generates additional output useful for debugging
+ */
 #undef DEBUG
 #define YOUNG 40
 #define OLD 70
