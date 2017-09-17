@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#undef LINT
+#undef DEBUG
 #define YOUNG 40
 #define OLD 70
 #define QUIT 200
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 {
 
    /* Some pre-processor code for very basic lint */
-   #ifdef LINT
+   #ifdef DEBUG
 
    static int i;
    printf( "argc: %d\n", argc );
