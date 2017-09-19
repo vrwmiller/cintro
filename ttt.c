@@ -4,10 +4,10 @@
 /* #define'ing DEBUG causes additional output useful for debugging */
 #undef DEBUG
 
-int board[3][3] = {
-   { 1,1,1 },
-   { 1,1,1 },
-   { 1,1,1 }
+char board[3][3] = {
+   { '1','1','1' },
+   { '1','X','1' },
+   { '1','1','1' },
 };
 int o, x;
 
@@ -33,7 +33,7 @@ int draw_board()
 
    while( x < 3 ) {
       while( y < 3 ) {
-         printf("%d\t", board[x][y]);
+         printf("%c\t", board[x][y]);
          y++;
       }
       x++;
