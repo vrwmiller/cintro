@@ -10,9 +10,6 @@ int board[3][3] = {
    { 1,1,1 }
 };
 int o, x;
-int totalMoves;
-int omoves = 0;
-int xmoves = 0;
 
 /*
  * Functions
@@ -53,9 +50,6 @@ int main(int argc, char *argv[])
    printf("Welcome to Tic-Tac-Toe!\n");
    draw_board(board);
    printf("The board is clear, X goes first!\n\n");
-
-   totalMoves = omoves + xmoves;
-   printf("Total moves: %d\n", totalMoves);
 
    return 0;
 }
