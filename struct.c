@@ -2,6 +2,12 @@
 
 #undef DEBUG
 
+struct db {
+   int age;
+   int id;
+   float sal;
+};
+
 int main(int argc, char *argv[])
 {
 
@@ -15,5 +21,11 @@ int main(int argc, char *argv[])
 
    #endif
 
+   struct db emp;
+   emp.age = 22;
+   emp.id = 1;
+   emp.sal = 12000.21;
+
+   printf("Emp ID: %d\n", emp.id);
    return 0;
 }
