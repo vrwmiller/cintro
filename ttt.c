@@ -26,7 +26,20 @@ int eval_turn()
 
 int draw_board()
 {
-   printf("Drawing board...\n");
+   int x = 0;
+   int y = 0;
+
+   printf("Drawing board...\n\n");
+
+   while( x < 3 ) {
+      while( y < 3 ) {
+         printf("%d\t", board[x][y]);
+         y++;
+      }
+      x++;
+      y = 0;
+      printf("\n");
+   }
    
    return 0;
 }
@@ -47,9 +60,9 @@ int main(int argc, char *argv[])
 
    #endif
 
-   printf("Welcome to Tic-Tac-Toe!\n");
+   printf("Welcome to Tic-Tac-Toe!\n\n");
    draw_board(board);
-   printf("The board is clear, X goes first!\n\n");
+   printf("\nThe board is clear, X goes first!\n\n");
 
    return 0;
 }
