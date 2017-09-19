@@ -22,10 +22,13 @@ int main(int argc, char *argv[])
    #endif
 
    struct db emp;
+   struct db *ptr;
    emp.age = 22;
    emp.id = 1;
    emp.sal = 12000.21;
 
-   printf("Emp ID: %d\n", emp.id);
+   ptr = &emp;
+   printf("Emp ID: %d\n", ptr->id);
+
    return 0;
 }
