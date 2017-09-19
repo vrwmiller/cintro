@@ -32,18 +32,23 @@ int main(int argc, char *argv[])
    #endif
 
    int age;
+   int *ptr;
+
    do {
+
       age = getNum();
-      if ( age < YOUNG ) {
-         printf( "%d is less than %d\n", age, YOUNG );
+      ptr = &age;
+
+      if ( *ptr < YOUNG ) {
+         printf( "%d is less than %d\n", *ptr, YOUNG );
       }
-      else if ( age > OLD ) {
-         printf( "%d is more than %d\n", age, OLD );
+      else if ( *ptr > OLD ) {
+         printf( "%d is more than %d\n", *ptr, OLD );
       }
       else {
-         printf( "%d is middle-aged\n", age );
+         printf( "%d is middle-aged\n", *ptr );
       }
-   } while( age != QUIT );
+   } while( *ptr != QUIT );
 
    return 0;
 }
