@@ -69,6 +69,23 @@ int take_turn()
    printf( "x: %d\ny: %d\n", x, y );
    #endif
 
+   printf( "%c", board[x][y] );
+   /*
+    * Placeholder for future code. Bed calls.
+    * 
+    * This future code needs to get the current value of board[x][y]
+    * and evaluate it as one of:
+    *
+    * -: The default position placeholder
+    * X: Player X selected position
+    * O: Player O selected position
+    *
+    * A position containing anything other than the default is claimed.
+    * Only a position containing the default value can be claimed by the 
+    * current player.
+    *
+    */
+
    if( player == 'X' ) {
       player = 'O';
    }
