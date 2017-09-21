@@ -21,10 +21,6 @@ int take_turn(void)
    printf( "\nNext Turn!\n%c, select a position [0-8]: ", player );
    scanf( "%d", &position ); /* I really don't like character strings */
 
-   #ifdef DEBUG
-   printf( "position: %d\n", position );
-   #endif
-
    if( position == 0 ) {
       x = 0;
       y = 0;
@@ -66,6 +62,7 @@ int take_turn(void)
    }
 
    #ifdef DEBUG
+   printf( "position: %d\n", position );
    printf( "x: %d\ny: %d\n", x, y );
    #endif
 
