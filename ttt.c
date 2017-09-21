@@ -62,26 +62,17 @@ int take_turn(void)
    }
 
    #ifdef DEBUG
-   printf( "position: %d\n", position );
+   printf( "Position: %d\n", position );
+   printf( "Position state: %c\n", board[x][y] );
    printf( "x: %d\ny: %d\n", x, y );
    #endif
 
-   printf( "Position state: %c\n", board[x][y] );
-   /*
-    * Placeholder for future code. Bed calls.
-    * 
-    * This future code needs to get the current value of board[x][y]
-    * and evaluate it as one of:
-    *
-    * -: The default position placeholder
-    * X: Player X selected position
-    * O: Player O selected position
-    *
-    * A position containing anything other than the default is claimed.
-    * Only a position containing the default value can be claimed by the 
-    * current player.
-    *
-    */
+   if( board[x][y] == '-' ) { /* Position open */
+      board[x][y] = player;
+   }
+   else { /* Position invalid */
+
+   }
 
    if( player == 'X' ) {
       player = 'O';
@@ -104,7 +95,7 @@ int is_winning_turn(void)
    return 1;
 }
 
-void draw_board(void)
+void draw_board()
 {
    int x = 0;
    int y = 0;
