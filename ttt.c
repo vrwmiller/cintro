@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <stdbool.h>
 
 /* #define'ing DEBUG causes additional output useful for debugging */
 #define DEBUG
@@ -18,7 +19,7 @@ int take_turn()
 {
    int position, x, y;
 
-   printf( "%c, select a position [0-8]: ", player );
+   printf( "\nNext Turn!\n%c, select a position [0-8]: ", player );
    scanf( "%d", &position ); /* I really don't like character strings */
 
    #ifdef DEBUG
@@ -102,6 +103,7 @@ int take_turn()
 
 int eval_turn()
 {
+
    return 0;
 }
 
@@ -110,7 +112,7 @@ void draw_board()
    int x = 0;
    int y = 0;
 
-   printf("Drawing board...\n\n");
+   printf("\nDrawing board...\n\n");
 
    while( x < 3 ) {
       while( y < 3 ) {
@@ -136,14 +138,14 @@ int main(int argc, char *argv[])
       printf( "argv[%d]: %s\n", i, argv[i] );
    #endif
 
-   printf("Welcome to Tic-Tac-Toe!\n");
-   printf("Positions on the board are 0 - 8 starting at top left, ending\n");
-   printf("bottom right.\n");
+   printf("Welcome to Tic-Tac-Toe!\n\n");
+   printf("\tPositions on the board are 0 - 8 starting at top left\n");
+   printf("\tand ending bottom right. X goes first.\n");
    draw_board(board);
-   printf("\nThe board is clear, X goes first!\n");
+   printf("\nThe board is clear...\n");
 
 
-   while(1)
+   while( true )
    {
       take_turn();
       draw_board();
