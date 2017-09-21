@@ -146,6 +146,7 @@ int main(int argc, char *argv[])
    while(1)
    {
       take_turn();
+      draw_board();
    }
 
    return 0;
