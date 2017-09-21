@@ -101,10 +101,11 @@ int take_turn()
    return 0;
 }
 
-int eval_turn()
+int is_winning_turn()
 {
-
-   return 0;
+   /* Code goes here to evaluate players turn.  If player made
+    * a winning move, we must return 1 to exit the game.
+   return 1;
 }
 
 void draw_board()
@@ -148,6 +149,10 @@ int main(int argc, char *argv[])
    while( true )
    {
       take_turn();
+      if( is_winning_turn()) {
+         draw_board();
+         break;
+      }
       draw_board();
    }
 
