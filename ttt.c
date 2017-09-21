@@ -15,7 +15,7 @@ char player = 'X';
 /*
  * Functions
  */
-int take_turn()
+int take_turn(void)
 {
    int position, x, y;
 
@@ -101,14 +101,14 @@ int take_turn()
    return 0;
 }
 
-int is_winning_turn()
+int is_winning_turn(void)
 {
    /* Code goes here to evaluate players turn.  If player made
     * a winning move, we must return 1 to exit the game. */
    return 1;
 }
 
-void draw_board()
+void draw_board(void)
 {
    int x = 0;
    int y = 0;
@@ -149,11 +149,11 @@ int main(int argc, char *argv[])
    while( true )
    {
       take_turn();
+      draw_board();
       if( is_winning_turn()) {
-         draw_board();
+         printf( "\nVictory!\nPlayer %c made the winning move!\n", player );
          break;
       }
-      draw_board();
    }
 
    return 0;
