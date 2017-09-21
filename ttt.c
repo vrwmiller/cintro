@@ -95,7 +95,7 @@ int take_turn()
    }
 
    #ifdef DEBUG
-   printf("Player = %c\n", player);
+   printf("Next player = %c\n", player);
    #endif
 
    return 0;
@@ -104,7 +104,7 @@ int take_turn()
 int is_winning_turn()
 {
    /* Code goes here to evaluate players turn.  If player made
-    * a winning move, we must return 1 to exit the game.
+    * a winning move, we must return 1 to exit the game. */
    return 1;
 }
 
