@@ -69,7 +69,7 @@ int take_turn()
    printf( "x: %d\ny: %d\n", x, y );
    #endif
 
-   printf( "%c", board[x][y] );
+   printf( "Position state: %c\n", board[x][y] );
    /*
     * Placeholder for future code. Bed calls.
     * 
@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
 
    while(1)
    {
-      take_turn(player);
+      take_turn();
    }
 
    return 0;
