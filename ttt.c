@@ -18,7 +18,7 @@ int take_turn()
 {
    int position, x, y;
 
-   printf( "X, select a position [0-8]: " );
+   printf( "%c, select a position [0-8]: ", player );
    scanf( "%d", &position ); /* I really don't like character strings */
 
    #ifdef DEBUG
