@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-/* #define'ing DEBUG causes additional output useful for debugging */
 #define DEBUG
 
 char board[3][3] = {
