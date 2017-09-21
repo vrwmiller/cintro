@@ -105,7 +105,7 @@ int eval_turn()
    return 0;
 }
 
-int draw_board()
+void draw_board()
 {
    int x = 0;
    int y = 0;
@@ -121,8 +121,6 @@ int draw_board()
       y = 0;
       printf("\n");
    }
-   
-   return 0;
 }
 
 /*
