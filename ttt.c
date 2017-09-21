@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #define DEBUG
+#define MAXMOVES 9
 
 char board[3][3] = {
    { '-','-','-' },
@@ -92,7 +93,7 @@ int is_winning_turn(void)
 {
    /* Code goes here to evaluate players turn.  If player made
     * a winning move, we must return 1 to exit the game. */
-   return 1;
+   return 0;
 }
 
 void draw_board()
@@ -126,21 +127,22 @@ int main(int argc, char *argv[])
       printf( "argv[%d]: %s\n", i, argv[i] );
    #endif
 
+   int ea;
+
    printf("Welcome to Tic-Tac-Toe!\n\n");
    printf("\tPositions on the board are 0 - 8 starting at top left\n");
    printf("\tand ending bottom right. X goes first.\n");
    draw_board(board);
    printf("\nThe board is clear...\n");
 
-
-   while( true )
-   {
+   while( ea < MAXMOVES ) {
       take_turn();
       draw_board();
       if( is_winning_turn()) {
          printf( "\nVictory!\nPlayer %c made the winning move!\n", player );
          break;
       }
+      ea++;
    }
 
    return 0;
