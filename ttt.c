@@ -15,12 +15,20 @@ char player = 'X';
 /*
  * Functions
  */
+int get_position()
+{
+   int i;
+
+   printf( "\n%c, select a position [0-8]: ", player );
+   scanf( "%d", &i ); /* I really don't like character strings */
+
+   return i;
+}
+
 int take_turn(void)
 {
-   int position, x, y;
-
-   printf( "\nNext Turn!\n%c, select a position [0-8]: ", player );
-   scanf( "%d", &position ); /* I really don't like character strings */
+   int x, y;
+   int position = get_position();
 
    if( position == 0 ) {
       x = 0;
