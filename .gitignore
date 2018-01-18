@@ -1,4 +1,5 @@
-hello
-age
-struct
-ttt
+# Ignore everything
+*
+
+# Except these files
+!*.c
