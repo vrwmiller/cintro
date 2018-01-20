@@ -8,7 +8,8 @@
 int main()
 {
    int fd;
-   fd = creat("datafile.dat", S_IREAD | S_IWRITE);
+/*   fd = creat("datafile.dat", S_IREAD | S_IWRITE); */
+   fd = creat("datafile.dat", 0644 );
    if (fd == -1)
       printf("Error in opening datafile.dat\n");
    else
