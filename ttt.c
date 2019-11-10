@@ -27,43 +27,43 @@ int get_position()
 
 int take_turn(void)
 {
-   int x, y;
+   int w, y;
    int position = get_position();
 
    if( position == 0 ) {
-      x = 0;
+      w = 0;
       y = 0;
    }
    else if( position == 1 ) {
-      x = 0;
+      w = 0;
       y = 1;
    }
    else if( position == 2 ) {
-      x = 0;
+      w = 0;
       y = 2;
    }
    else if( position == 3 ) {
-      x = 1;
+      w = 1;
       y = 0;
    }
    else if( position == 4 ) {
-      x = 1;
+      w = 1;
       y = 1;
    }
    else if( position == 5 ) {
-      x = 1;
+      w = 1;
       y = 2;
    }
    else if( position == 6 ) {
-      x = 2;
+      w = 2;
       y = 0;
    }
    else if( position == 7 ) {
-      x = 2;
+      w = 2;
       y = 1;
    }
    else if( position == 8 ) {
-      x = 2;
+      w = 2;
       y = 2;
    }
    else {
@@ -72,12 +72,12 @@ int take_turn(void)
 
    #ifdef DEBUG
    printf( "Position: %d\n", position );
-   printf( "Position state: %c\n", board[x][y] );
-   printf( "x: %d\ny: %d\n", x, y );
+   printf( "Position state: %c\n", board[w][y] );
+   printf( "w: %d\ny: %d\n", w, y );
    #endif
 
-   if( board[x][y] == '-' ) { /* Position open */
-      board[x][y] = player;
+   if( board[w][y] == '-' ) { /* Position open */
+      board[w][y] = player;
    }
    else { /* Position invalid */
 
@@ -106,17 +106,17 @@ int is_winning_turn(void)
 
 void draw_board()
 {
-   int x = 0;
+   int w = 0;
    int y = 0;
 
    printf("\nDrawing board...\n\n");
 
-   while( x < 3 ) {
+   while( w < 3 ) {
       while( y < 3 ) {
-         printf("%c\t", board[x][y]);
+         printf("%c\t", board[w][y]);
          y++;
       }
-      x++;
+      w++;
       y = 0;
       printf("\n");
    }
