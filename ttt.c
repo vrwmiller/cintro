@@ -10,7 +10,9 @@ char board[3][3] = {
    { '-','-','-' },
    { '-','-','-' },
 };
-char player = 'X';
+char x = 'X';
+char o = 'O';
+char *player = &x;
 
 /*
  * Functions
@@ -19,7 +21,7 @@ int get_position()
 {
    int i;
 
-   printf( "\n%c, select a position [0-8]: ", player );
+   printf( "\n%c, select a position [0-8]: ", *player );
    scanf( "%d", &i ); /* I really don't like character strings */
 
    return i;
@@ -77,21 +79,21 @@ int take_turn(void)
    #endif
 
    if( board[w][y] == '-' ) { /* Position open */
-      board[w][y] = player;
+      board[w][y] = *player;
    }
    else { /* Position invalid */
 
    }
 
-   if( player == 'X' ) {
-      player = 'O';
+   if( *player == x ) {
+      player = &o;
    }
-   else if( player == 'O' ) {
-      player = 'X';
+   else if( *player == o ) {
+      player = &x;
    }
 
    #ifdef DEBUG
-   printf("Next player = %c\n", player);
+   printf("Next player = %c\n", *player);
    #endif
 
    return 0;
@@ -140,14 +142,14 @@ int main(int argc, char *argv[])
    printf("Welcome to Tic-Tac-Toe!\n\n");
    printf("\tPositions on the board are 0 - 8 starting at top left\n");
    printf("\tand ending bottom right. X goes first.\n");
-   draw_board(board);
+   draw_board();
    printf("\nThe board is clear...\n");
 
    while( ea < MAXMOVES ) {
       take_turn();
       draw_board();
       if( is_winning_turn()) {
-         printf( "\nVictory!\nPlayer %c made the winning move!\n", player );
+         printf( "\nVictory!\nPlayer %c made the winning move!\n", *player );
          break;
       }
       ea++;
