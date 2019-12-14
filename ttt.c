@@ -65,8 +65,7 @@ int take_turn(void)
 
 int is_winning_turn(void)
 {
-   /* Code goes here to evaluate players turn.  If player made
-    * a winning move, we must return 1 to exit the game. */
+   /* Evaluate play; Exit if a winning move is made */
    return 0;
 }
 
