@@ -5,14 +5,20 @@
 #define DEBUG
 #define MAXMOVES 9
 
-char board[3][3] = {
-   { '-','-','-' },
-   { '-','-','-' },
-   { '-','-','-' },
+int x = 1;
+int o = 2;
+int board[MAXMOVES] = { 0,0,0,0,0,0,0,0,0 };
+int *player = &x;
+int *winningMv[8][3] = {
+   { &board[0], &board[1], &board[2] },
+   { &board[3], &board[4], &board[5] },
+   { &board[6], &board[7], &board[8] },
+   { &board[0], &board[3], &board[6] },
+   { &board[1], &board[4], &board[7] },
+   { &board[2], &board[5], &board[8] },
+   { &board[0], &board[4], &board[8] },
+   { &board[2], &board[4], &board[6] }
 };
-char x = 'X';
-char o = 'O';
-char *player = &x;
 
 /*
  * Functions
@@ -29,57 +35,15 @@ int get_position()
 
 int take_turn(void)
 {
-   int w, y;
    int position = get_position();
-
-   if( position == 0 ) {
-      w = 0;
-      y = 0;
-   }
-   else if( position == 1 ) {
-      w = 0;
-      y = 1;
-   }
-   else if( position == 2 ) {
-      w = 0;
-      y = 2;
-   }
-   else if( position == 3 ) {
-      w = 1;
-      y = 0;
-   }
-   else if( position == 4 ) {
-      w = 1;
-      y = 1;
-   }
-   else if( position == 5 ) {
-      w = 1;
-      y = 2;
-   }
-   else if( position == 6 ) {
-      w = 2;
-      y = 0;
-   }
-   else if( position == 7 ) {
-      w = 2;
-      y = 1;
-   }
-   else if( position == 8 ) {
-      w = 2;
-      y = 2;
-   }
-   else {
-      return 1;
-   }
 
    #ifdef DEBUG
    printf( "Position: %d\n", position );
-   printf( "Position state: %c\n", board[w][y] );
-   printf( "w: %d\ny: %d\n", w, y );
+   printf( "Position state: %d\n", board[position] );
    #endif
 
-   if( board[w][y] == '-' ) { /* Position open */
-      board[w][y] = *player;
+   if( board[position] == 0 ) { /* Position open */
+      board[position] = *player;
    }
    else { /* Position invalid */
 
@@ -108,20 +72,18 @@ int is_winning_turn(void)
 
 void draw_board()
 {
-   int w = 0;
-   int y = 0;
-
+   int j = 1;
    printf("\nDrawing board...\n\n");
 
-   while( w < 3 ) {
-      while( y < 3 ) {
-         printf("%c\t", board[w][y]);
-         y++;
+   for( int i = 0; i < MAXMOVES; i++ )
+   {
+      printf("%d\t", board[i]);
+      if( j%3 == 0 ) {
+         printf("\n");
       }
-      w++;
-      y = 0;
-      printf("\n");
+      j++;
    }
+
 }
 
 /*
@@ -137,14 +99,13 @@ int main(int argc, char *argv[])
       printf( "argv[%d]: %s\n", i, argv[i] );
    #endif
 
-   int ea;
-
    printf("Welcome to Tic-Tac-Toe!\n\n");
    printf("\tPositions on the board are 0 - 8 starting at top left\n");
    printf("\tand ending bottom right. X goes first.\n");
    draw_board();
    printf("\nThe board is clear...\n");
 
+   int ea = 0;
    while( ea < MAXMOVES ) {
       take_turn();
       draw_board();
