@@ -36,7 +36,10 @@ int get_position()
 int is_winning_turn(void)
 {
    /* Evaluate play; Exit if a winning move is made */
-   return 0;
+   #ifdef DEBUG
+   printf("DEBUG: is_winning?\n");
+   #endif
+   return false;
 }
 
 void draw_board()
@@ -62,13 +65,13 @@ int main(int argc, char *argv[])
 
    #ifdef DEBUG
    static int i;
-   printf( "argc: %d\n", argc );
+   printf( "DEBUG: argc: %d\n", argc );
    for( i=0; i<argc; i++ )
-      printf( "argv[%d]: %s\n", i, argv[i] );
+      printf( "DEBUG: argv[%d]: %s\n", i, argv[i] );
    #endif
 
    printf("Welcome to Tic-Tac-Toe!\n\n");
-   printf("\tPositions on the board are 0 - 8 starting at top left\n");
+   printf("\tBoard positions are 0 - 8 starting at top left\n");
    printf("\tand ending bottom right. X goes first.\n");
    draw_board();
    printf("\nThe board is clear...\n");
@@ -76,9 +79,12 @@ int main(int argc, char *argv[])
    int move = 0;
    int vpos = 1;
    int pos;
+   bool win;
 
    do {
-      printf("move: %d; vpos: %d\n", move, vpos);
+      #ifdef DEBUG
+      printf("\nDEBUG: move: %d; vpos: %d\n", move, vpos);
+      #endif
       while( vpos != 0 ) {
           pos = get_position();
           if( board[pos] == 0 ) {
@@ -90,12 +96,16 @@ int main(int argc, char *argv[])
                 player = &x;
              }
              vpos = 0;
+          } else {
+             printf("Invalid move, try again!\n");
           }
       }
 
       vpos++;
       move++;
-   } while( move < MAXMOVES || is_winning_turn() );
+      win = is_winning_turn();
+
+   } while( (move < MAXMOVES ) && ( win == false ) );
 
    printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
 
