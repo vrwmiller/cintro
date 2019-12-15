@@ -23,7 +23,7 @@ int *winningMv[8][3] = {
 /*
  * Functions
  */
-int get_position()
+int get_position(void)
 {
    int i;
 
@@ -79,23 +79,34 @@ int main(int argc, char *argv[])
    int move = 0;
    int vpos = 1;
    int pos;
-   bool win = false;
+   bool iswin = false;
 
    do {
+
       #ifdef DEBUG
       printf("\nDEBUG: move: %d; vpos: %d\n", move, vpos);
       #endif
+
       while( vpos != 0 ) {
+
           pos = get_position();
+
           if( board[pos] == 0 ) {
+
              board[pos] = *player;
+             iswin = is_winning_turn();
+
              draw_board();
-             if( *player == x ) {
-                player = &o;
-             } else if( *player == o ) {
-                player = &x;
+             if( iswin == false) {
+                if( *player == x ) {
+                   player = &o;
+                } else if( *player == o ) {
+                   player = &x;
+                }
              }
+
              vpos = 0;
+
           } else {
              printf("Invalid move, try again!\n");
           }
@@ -103,9 +114,8 @@ int main(int argc, char *argv[])
 
       vpos++;
       move++;
-      win = is_winning_turn();
 
-   } while( (move < MAXMOVES ) && ( win == false ) );
+   } while( (move < MAXMOVES ) && ( iswin == false ) );
 
    printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
 
