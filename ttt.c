@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
    int move = 0;
    int vpos = 1;
    int pos;
-   bool win;
+   bool win = false;
 
    do {
       #ifdef DEBUG
