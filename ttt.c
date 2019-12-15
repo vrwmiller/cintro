@@ -27,40 +27,10 @@ int get_position()
 {
    int i;
 
-   printf( "\n%c, select a position [0-8]: ", *player );
+   printf( "\n%d, select a position [0-8]: ", *player );
    scanf( "%d", &i ); /* I really don't like character strings */
 
    return i;
-}
-
-int take_turn(void)
-{
-   int position = get_position();
-
-   #ifdef DEBUG
-   printf( "Position: %d\n", position );
-   printf( "Position state: %d\n", board[position] );
-   #endif
-
-   if( board[position] == 0 ) { /* Position open */
-      board[position] = *player;
-   }
-   else { /* Position invalid */
-
-   }
-
-   if( *player == x ) {
-      player = &o;
-   }
-   else if( *player == o ) {
-      player = &x;
-   }
-
-   #ifdef DEBUG
-   printf("Next player = %c\n", *player);
-   #endif
-
-   return 0;
 }
 
 int is_winning_turn(void)
@@ -77,9 +47,8 @@ void draw_board()
    for( int i = 0; i < MAXMOVES; i++ )
    {
       printf("%d\t", board[i]);
-      if( j%3 == 0 ) {
+      if( j%3 == 0 )
          printf("\n");
-      }
       j++;
    }
 
@@ -104,16 +73,29 @@ int main(int argc, char *argv[])
    draw_board();
    printf("\nThe board is clear...\n");
 
-   int ea = 0;
-   while( ea < MAXMOVES ) {
-      take_turn();
-      draw_board();
-      if( is_winning_turn()) {
-         printf( "\nVictory!\nPlayer %c made the winning move!\n", *player );
-         break;
-      }
-      ea++;
-   }
+   int move = 0;
+   int pos, vpos;
 
-   return 0;
+   do {
+      printf("move: %d; vpos: %d\n", move, vpos);
+      while( vpos != 0 ) {
+          pos = get_position();
+          if( board[pos] == 0 ) {
+             board[pos] = *player;
+             draw_board();
+             if( *player == x ) {
+                player = &o;
+             } else if( *player == o ) {
+                player = &x;
+             }
+             vpos = 0;
+          }
+      }
+
+      vpos++;
+      move++;
+   } while( move < MAXMOVES || is_winning_turn() );
+
+   printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
+
 }
