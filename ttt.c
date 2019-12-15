@@ -74,7 +74,8 @@ int main(int argc, char *argv[])
    printf("\nThe board is clear...\n");
 
    int move = 0;
-   int pos, vpos;
+   int vpos = 1;
+   int pos;
 
    do {
       printf("move: %d; vpos: %d\n", move, vpos);
