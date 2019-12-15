@@ -1,9 +1,10 @@
-
 #include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 #define DEBUG
 #define MAXMOVES 9
+#define MAXINPUT 1
 
 int x = 1;
 int o = 2;
@@ -23,25 +24,42 @@ int *winningMv[8][3] = {
 /*
  * Functions
  */
+
+/* Get position from player */
 int get_position(void)
 {
    int i;
+   char input[MAXINPUT];
+   bool vpos = false;
 
-   printf( "\n%d, select a position [0-8]: ", *player );
-   scanf( "%d", &i ); /* I really don't like character strings */
+   while(vpos != true) {
+      printf( "\n%d, select a position [0-8] or ctrl-c to exit: ", *player );
+      scanf( "%s", &input[0] );
+
+      if( isdigit(input[0]) ) {
+
+         /* Recast char input[0] as int i */
+         i = input[0] - '0';
+
+         if( i >= 0 && i <= 8 )
+            vpos = true;
+      }
+   }
 
    return i;
 }
 
+/* Evaluate play; Return true if play is winnder */
 int is_winning_turn(void)
 {
-   /* Evaluate play; Exit if a winning move is made */
    #ifdef DEBUG
    printf("DEBUG: is_winning?\n");
    #endif
+
    return false;
 }
 
+/* Output current board */
 void draw_board()
 {
    int j = 1;
@@ -54,7 +72,6 @@ void draw_board()
          printf("\n");
       j++;
    }
-
 }
 
 /*
