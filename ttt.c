@@ -54,7 +54,6 @@ int is_winning_turn(void)
 {
 
    int i, j;
-   int k = 1;
    bool win = false;
 
    for( i = 0; i < 8; i++ ) {
