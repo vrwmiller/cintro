@@ -10,7 +10,7 @@ int x = 1;
 int o = 2;
 int board[MAXMOVES] = { 0,0,0,0,0,0,0,0,0 };
 int *player = &x;
-int *winningMv[8][3] = {
+int *winMv[8][3] = {
    { &board[0], &board[1], &board[2] },
    { &board[3], &board[4], &board[5] },
    { &board[6], &board[7], &board[8] },
@@ -49,14 +49,26 @@ int get_position(void)
    return i;
 }
 
-/* Evaluate play; Return true if play is winnder */
+/* Evaluate play; Return true if play is winner */
 int is_winning_turn(void)
 {
-   #ifdef DEBUG
-   printf("DEBUG: is_winning?\n");
-   #endif
 
-   return false;
+   int i, j;
+   int k = 1;
+   bool win = false;
+
+   for( i = 0; i < 8; i++ ) {
+
+      /* Moves starting w/ 0 cannot be a winning move */
+      if( *winMv[i][0] == 0 )
+         continue;
+
+      if( *winMv[i][0] == *winMv[i][1] && *winMv[i][1] == *winMv[i][2] )
+            win = true;
+   }
+
+   return win;
+
 }
 
 /* Output current board */
