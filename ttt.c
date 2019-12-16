@@ -30,9 +30,9 @@ int get_position(void)
 {
    int i;
    char input[MAXINPUT];
-   bool vpos = false;
+   bool lpos = false;
 
-   while(vpos != true) {
+   while(lpos != true) {
       printf( "\n%d, select a position [0-8] or ctrl-c to exit: ", *player );
       scanf( "%s", &input[0] );
 
@@ -42,7 +42,7 @@ int get_position(void)
          i = input[0] - '0';
 
          if( i >= 0 && i <= 8 )
-            vpos = true;
+            lpos = true;
       }
    }
 
@@ -53,7 +53,7 @@ int get_position(void)
 int is_winning_turn(void)
 {
 
-   int i, j;
+   int i;
    bool win = false;
 
    for( i = 0; i < 8; i++ ) {
@@ -105,17 +105,17 @@ int main(int argc, char *argv[])
    printf("\nThe board is clear...\n");
 
    int move = 0;
-   int vpos = 1;
    int pos;
+   bool validPos = false;
    bool iswin = false;
 
    do {
 
       #ifdef DEBUG
-      printf("\nDEBUG: move: %d; vpos: %d\n", move, vpos);
+      printf("\nDEBUG: move: %d; validPos: %d\n", move, validPos);
       #endif
 
-      while( vpos != 0 ) {
+      while( validPos != true ) {
 
           pos = get_position();
 
@@ -133,18 +133,21 @@ int main(int argc, char *argv[])
                 }
              }
 
-             vpos = 0;
+             validPos = true;
 
           } else {
              printf("Invalid move, try again!\n");
           }
       }
 
-      vpos++;
+      validPos = false;
       move++;
 
    } while( (move < MAXMOVES ) && ( iswin == false ) );
 
-   printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
+   if( iswin == true )
+      printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
+   else
+      printf( "\nIt's a tie\n" );
 
 }
