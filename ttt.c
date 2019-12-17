@@ -53,17 +53,16 @@ int get_position(void)
 int is_winning_turn(void)
 {
 
-   int i;
+   int i = 0;
    bool win = false;
 
-   for( i = 0; i < 8; i++ ) {
-
-      /* Moves starting w/ 0 cannot be a winning move */
-      if( *winMv[i][0] == 0 )
-         continue;
+   while( win == false && i < 8 ) {
 
       if( *winMv[i][0] == *winMv[i][1] && *winMv[i][1] == *winMv[i][2] )
+         if( *winMv[i][0] != 0 )
             win = true;
+      i++;
+
    }
 
    return win;
