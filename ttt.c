@@ -58,8 +58,8 @@ int is_winning_turn(void)
 
    while( win == false && i < 8 ) {
 
-      if( *winMv[i][0] == *winMv[i][1] && *winMv[i][1] == *winMv[i][2] )
-         if( *winMv[i][0] != 0 )
+      if( *winMv[i][0] != 0 )
+         if( *winMv[i][0] == *winMv[i][1] && *winMv[i][1] == *winMv[i][2] )
             win = true;
       i++;
 
