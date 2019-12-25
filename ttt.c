@@ -64,8 +64,8 @@ int get_position(void)
 
 /* Evaluate play/game mode:
  * 0: game play
- * 1: tie game
- * 2: game win
+ * 1: game win
+ * 2: tie game
  */
 void is_winning_turn(int *var)
 {
@@ -76,7 +76,7 @@ void is_winning_turn(int *var)
 
       if( *winMv[i][0] != 0 && *winMv[i][1] != 0 && *winMv[i][2] != 0 )
          if( *winMv[i][0] == *winMv[i][1] && *winMv[i][1] == *winMv[i][2] )
-            *var = 2;
+            *var = 1;
       i++;
 
    }
@@ -153,7 +153,7 @@ int main(int argc, char *argv[])
 
    } while( (moves() > 0 ) && ( mode == 0 ) );
 
-   if( mode == 2 )
+   if( mode == 1 )
       printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
    else
       printf( "\nIt's a tie\n" );
