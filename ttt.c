@@ -25,6 +25,18 @@ int *winMv[8][3] = {
  * Functions
  */
 
+/* How many moves are left? */
+int moves(void)
+{
+   int i, j = 0;
+
+   for( i = 0; i < MAXMOVES; i++ )
+      if( board[i] == 0 )
+         j++;
+
+   return j;
+}
+
 /* Get position from player */
 int get_position(void)
 {
@@ -103,7 +115,6 @@ int main(int argc, char *argv[])
    draw_board();
    printf("\nThe board is clear...\n");
 
-   int move = 0;
    int pos;
    bool validPos = false;
    bool iswin = false;
@@ -111,7 +122,7 @@ int main(int argc, char *argv[])
    do {
 
       #ifdef DEBUG
-      printf("\nDEBUG: move: %d; validPos: %d\n", move, validPos);
+      printf("\nDEBUG: move: %d; validPos: %d\n", moves(), validPos);
       #endif
 
       while( validPos != true ) {
@@ -140,9 +151,8 @@ int main(int argc, char *argv[])
       }
 
       validPos = false;
-      move++;
 
-   } while( (move < MAXMOVES ) && ( iswin == false ) );
+   } while( (moves() > 0 ) && ( iswin == false ) );
 
    if( iswin == true )
       printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
