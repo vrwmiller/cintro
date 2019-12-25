@@ -118,38 +118,31 @@ int main(int argc, char *argv[])
    printf("\nThe board is clear...\n");
 
    int pos;
-   bool validPos = false;
 
    do {
 
       #ifdef DEBUG
-      printf("\nDEBUG: move: %d; validPos: %d\n", moves(), validPos);
+      printf("\nDEBUG: move: %d; mode: %d\n", moves(), mode);
       #endif
 
-      while( validPos != true ) {
+      pos = get_position();
 
-          pos = get_position();
+      if( board[pos] == 0 ) {
 
-          if( board[pos] == 0 ) {
+         board[pos] = *player;
+         draw_board();
+         is_winning_turn(&mode);
+         if( mode == 0) {
+            if( *player == x ) {
+               player = &o;
+            } else if( *player == o ) {
+               player = &x;
+            }
+         }
 
-             validPos = true;
-             board[pos] = *player;
-             draw_board();
-             is_winning_turn(&mode);
-             if( mode == 0) {
-                if( *player == x ) {
-                   player = &o;
-                } else if( *player == o ) {
-                   player = &x;
-                }
-             }
-
-          } else {
-             printf("Invalid move, try again!\n");
-          }
+      } else {
+         printf("Invalid move, try again!\n");
       }
-
-      validPos = false;
 
    } while( (moves() > 0 ) && ( mode == 0 ) );
 
