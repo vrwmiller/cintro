@@ -8,6 +8,7 @@
 
 int x = 1;
 int o = 2;
+int mode = 0;
 int board[MAXMOVES] = { 0,0,0,0,0,0,0,0,0 };
 int *player = &x;
 int *winMv[8][3] = {
@@ -61,23 +62,24 @@ int get_position(void)
    return i;
 }
 
-/* Evaluate play; Return true if play is winner */
-int is_winning_turn(void)
+/* Evaluate play/game mode:
+ * 0: game play
+ * 1: tie game
+ * 2: game win
+ */
+void is_winning_turn(int *var)
 {
 
    int i = 0;
-   bool win = false;
 
-   while( win == false && i < 8 ) {
+   while( *var == 0 && i < 8 ) {
 
       if( *winMv[i][0] != 0 && *winMv[i][1] != 0 && *winMv[i][2] != 0 )
          if( *winMv[i][0] == *winMv[i][1] && *winMv[i][1] == *winMv[i][2] )
-            win = true;
+            *var = 2;
       i++;
 
    }
-
-   return win;
 
 }
 
@@ -117,7 +119,6 @@ int main(int argc, char *argv[])
 
    int pos;
    bool validPos = false;
-   bool iswin = false;
 
    do {
 
@@ -131,19 +132,17 @@ int main(int argc, char *argv[])
 
           if( board[pos] == 0 ) {
 
+             validPos = true;
              board[pos] = *player;
-             iswin = is_winning_turn();
-
              draw_board();
-             if( iswin == false) {
+             is_winning_turn(&mode);
+             if( mode == 0) {
                 if( *player == x ) {
                    player = &o;
                 } else if( *player == o ) {
                    player = &x;
                 }
              }
-
-             validPos = true;
 
           } else {
              printf("Invalid move, try again!\n");
@@ -152,9 +151,9 @@ int main(int argc, char *argv[])
 
       validPos = false;
 
-   } while( (moves() > 0 ) && ( iswin == false ) );
+   } while( (moves() > 0 ) && ( mode == 0 ) );
 
-   if( iswin == true )
+   if( mode == 2 )
       printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
    else
       printf( "\nIt's a tie\n" );
