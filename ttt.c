@@ -5,12 +5,13 @@
 #define DEBUG
 #define MAXMOVES 9
 #define MAXINPUT 1
+#define WINMOVES 8
 
-int x = 1;
-int o = 2;
+const int x = 1;
+const int o = 2;
+const int *player = &x;
 int mode = 0;
 int board[MAXMOVES] = { 0,0,0,0,0,0,0,0,0 };
-int *player = &x;
 int *winMv[8][3] = {
    { &board[0], &board[1], &board[2] },
    { &board[3], &board[4], &board[5] },
@@ -54,7 +55,7 @@ int get_position(void)
          /* Recast char input[0] as int i */
          i = input[0] - '0';
 
-         if( i >= 0 && i <= 8 )
+         if( i >= 0 && i <= WINMOVES )
             lpos = true;
       }
    }
@@ -72,7 +73,7 @@ void is_winning_turn(int *var)
 
    int i = 0;
 
-   while( *var == 0 && i < 8 ) {
+   while( *var == 0 && i < WINMOVES ) {
 
       if( *winMv[i][0] != 0 && *winMv[i][1] != 0 && *winMv[i][2] != 0 )
          if( *winMv[i][0] == *winMv[i][1] && *winMv[i][1] == *winMv[i][2] )
@@ -122,7 +123,7 @@ int main(int argc, char *argv[])
    do {
 
       #ifdef DEBUG
-      printf("\nDEBUG: move: %d; mode: %d\n", moves(), mode);
+      printf("\nDEBUG: moves remaining: %d; mode: %d\n", moves(), mode);
       #endif
 
       pos = get_position();
@@ -149,6 +150,10 @@ int main(int argc, char *argv[])
    if( mode == 1 )
       printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
    else
+      mode = 2;
       printf( "\nIt's a tie\n" );
 
+   #ifdef DEBUG
+   printf("\nDEBUG: moves remaining: %d; mode: %d\n", moves(), mode);
+   #endif
 }
