@@ -10,6 +10,7 @@
 const int x = 1;
 const int o = 2;
 const int *player = &x;
+int pos = -1;
 int mode = 0;
 int board[MAXMOVES] = { 0,0,0,0,0,0,0,0,0 };
 int *winMv[8][3] = {
@@ -40,7 +41,7 @@ int moves(void)
 }
 
 /* Get position from player */
-int get_position(void)
+void get_position(int *pos_ptr)
 {
    int i;
    char input[MAXINPUT];
@@ -50,17 +51,18 @@ int get_position(void)
       printf( "\n%d, select a position [0-8] or ctrl-c to exit: ", *player );
       scanf( "%s", &input[0] );
 
-      if( isdigit(input[0]) ) {
-
-         /* Recast char input[0] as int i */
+      /* Recast char input[0] as int i */
+      if( isdigit(input[0]) )
          i = input[0] - '0';
 
-         if( i >= 0 && i <= WINMOVES )
-            lpos = true;
+      if( (i >= 0 && i <= WINMOVES) && board[i] == 0 ) {
+         *pos_ptr = i;
+         lpos = true;
+      } else {
+         printf("Invalid move, try again!\n");
       }
    }
 
-   return i;
 }
 
 /* Evaluate play/game mode:
@@ -117,31 +119,22 @@ int main(int argc, char *argv[])
    draw_board();
    printf("\nThe board is clear...\n");
 
-   int pos;
-
    do {
 
       #ifdef DEBUG
       printf("\nDEBUG: moves remaining: %d; mode: %d\n", moves(), mode);
       #endif
 
-      pos = get_position();
-
-      if( board[pos] == 0 ) {
-
-         board[pos] = *player;
-         draw_board();
-         is_winning_turn(&mode);
-         if( mode == 0) {
-            if( *player == x ) {
-               player = &o;
-            } else if( *player == o ) {
-               player = &x;
-            }
+      get_position(&pos);
+      board[pos] = *player;
+      draw_board();
+      is_winning_turn(&mode);
+      if( mode == 0) {
+         if( *player == x ) {
+            player = &o;
+         } else if( *player == o ) {
+            player = &x;
          }
-
-      } else {
-         printf("Invalid move, try again!\n");
       }
 
    } while( (moves() > 0 ) && ( mode == 0 ) );
