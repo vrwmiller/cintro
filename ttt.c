@@ -74,12 +74,11 @@ void is_winning_turn(int *var)
    int i = 0;
 
    while( *var == 0 && i < WINMOVES ) {
-
       if( *winMv[i][0] != 0 && *winMv[i][1] != 0 && *winMv[i][2] != 0 )
          if( *winMv[i][0] == *winMv[i][1] && *winMv[i][1] == *winMv[i][2] )
             *var = 1;
-      i++;
 
+      i++;
    }
 
 }
@@ -114,7 +113,7 @@ int main(int argc, char *argv[])
 
    printf("Welcome to Tic-Tac-Toe!\n\n");
    printf("\tBoard positions are 0 - 8 starting at top left\n");
-   printf("\tand ending bottom right. X goes first.\n");
+   printf("\tand ending bottom right. %d goes first.\n", *player);
    draw_board();
    printf("\nThe board is clear...\n");
 
@@ -147,11 +146,12 @@ int main(int argc, char *argv[])
 
    } while( (moves() > 0 ) && ( mode == 0 ) );
 
-   if( mode == 1 )
+   if( mode == 1 ) {
       printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
-   else
+   } else {
       mode = 2;
       printf( "\nIt's a tie\n" );
+   }
 
    #ifdef DEBUG
    printf("\nDEBUG: moves remaining: %d; mode: %d\n", moves(), mode);
