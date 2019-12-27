@@ -43,7 +43,7 @@ int moves(void)
 /* Get position from player */
 void get_position(int *pos_ptr)
 {
-   int i;
+   int i = -1;
    char input[MAXINPUT];
    bool lpos = false;
 
