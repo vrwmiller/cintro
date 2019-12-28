@@ -62,7 +62,6 @@ void get_position(int *pos_ptr)
          printf("Invalid move, try again!\n");
       }
    }
-
 }
 
 /* Evaluate play/game mode:
@@ -72,7 +71,6 @@ void get_position(int *pos_ptr)
  */
 void is_winning_turn(int *var)
 {
-
    int i = 0;
 
    while( *var == 0 && i < WINMOVES ) {
@@ -82,7 +80,6 @@ void is_winning_turn(int *var)
 
       i++;
    }
-
 }
 
 /* Output current board */
@@ -105,7 +102,6 @@ void draw_board()
  */
 int main(int argc, char *argv[])
 {
-
    #ifdef DEBUG
    static int i;
    printf( "DEBUG: argc: %d\n", argc );
