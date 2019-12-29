@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-#define DEBUG
+/* #define DEBUG */
 #define MAXMOVES 9
 #define MAXINPUT 1
 #define WINMOVES 8
@@ -98,9 +98,9 @@ void draw_board()
       if( board[i] == 0 )
          printf("-\t");
       else if( board[i] == 1 )
-         printf("X\t");
+         printf("%s\t", x.name);
       else if( board[i] == 2 )
-         printf("O\t");
+         printf("%s\t", o.name);
 
       if( j%3 == 0 )
          printf("\n");
