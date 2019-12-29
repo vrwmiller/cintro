@@ -7,9 +7,14 @@
 #define MAXINPUT 1
 #define WINMOVES 8
 
-const int x = 1;
-const int o = 2;
-const int *player = &x;
+struct user {
+   int   id;         /* Player ID */
+   char  name[1];    /* Player Name */
+} x, o;
+
+struct user x = {1,'X'};
+struct user o = {2,'O'};
+struct user *player = &x;
 int pos = -1;
 int mode = 0;
 int board[MAXMOVES] = { 0,0,0,0,0,0,0,0,0 };
@@ -48,7 +53,7 @@ void get_position(int *pos_ptr)
    bool lpos = false;
 
    while(lpos != true) {
-      printf( "\n%d, select a position [0-8] or ctrl-c to exit: ", *player );
+      printf( "\n%s, select a position [0-8] or ctrl-c to exit: ", player->name );
       scanf( "%s", &input[0] );
 
       /* Recast char input[0] as int i */
@@ -111,7 +116,7 @@ int main(int argc, char *argv[])
 
    printf("Welcome to Tic-Tac-Toe!\n\n");
    printf("\tBoard positions are 0 - 8 starting at top left\n");
-   printf("\tand ending bottom right. %d goes first.\n", *player);
+   printf("\tand ending bottom right. %s goes first.\n", player->name);
    draw_board();
    printf("\nThe board is clear...\n");
 
@@ -122,13 +127,13 @@ int main(int argc, char *argv[])
       #endif
 
       get_position(&pos);
-      board[pos] = *player;
+      board[pos] = player->id;
       draw_board();
       is_winning_turn(&mode);
       if( mode == 0) {
-         if( *player == x ) {
+         if( player->id == x.id ) {
             player = &o;
-         } else if( *player == o ) {
+         } else if( player->id == o.id ) {
             player = &x;
          }
       }
@@ -136,7 +141,7 @@ int main(int argc, char *argv[])
    } while( (moves() > 0 ) && ( mode == 0 ) );
 
    if( mode == 1 ) {
-      printf( "\nVictory!\nPlayer %d made the winning move!\n", *player );
+      printf( "\nVictory!\nPlayer %s made the winning move!\n", player->name );
    } else {
       mode = 2;
       printf( "\nIt's a tie\n" );
