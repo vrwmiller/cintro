@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-/* #define DEBUG */
+#define DEBUG
 #define MAXMOVES 9
 #define MAXINPUT 1
 #define WINMOVES 8
