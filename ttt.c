@@ -95,7 +95,13 @@ void draw_board()
 
    for( int i = 0; i < MAXMOVES; i++ )
    {
-      printf("%d\t", board[i]);
+      if( board[i] == 0 )
+         printf("-\t");
+      else if( board[i] == 1 )
+         printf("X\t");
+      else if( board[i] == 2 )
+         printf("O\t");
+
       if( j%3 == 0 )
          printf("\n");
       j++;
