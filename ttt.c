@@ -97,9 +97,9 @@ void draw_board()
    {
       if( board[i] == 0 )
          printf("-\t");
-      else if( board[i] == 1 )
+      else if( board[i] == x.id )
          printf("%s\t", x.name);
-      else if( board[i] == 2 )
+      else if( board[i] == o.id )
          printf("%s\t", o.name);
 
       if( j%3 == 0 )
