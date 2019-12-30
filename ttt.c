@@ -95,12 +95,12 @@ void draw_board()
 
    for( int i = 0; i < MAXMOVES; i++ )
    {
-      if( board[i] == 0 )
-         printf("-\t");
-      else if( board[i] == x.id )
+      if( board[i] == x.id )
          printf("%s\t", x.name);
       else if( board[i] == o.id )
          printf("%s\t", o.name);
+      else
+         printf("-\t");
 
       if( j%3 == 0 )
          printf("\n");
